@@ -1,5 +1,5 @@
-Pico Sitemap
-============
+Pico Multilanguage
+==================
 
 [Pico][1] plugin for multi-language support.
 
