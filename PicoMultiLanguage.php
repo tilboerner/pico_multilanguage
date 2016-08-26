@@ -62,7 +62,7 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
      */
     protected $dependsOn = array();
 
-	private
+    private
         $default_language = 'en',       // override with config['default_language']
         $pages_by_language = array(),   // array of page data grouped by language
         $pages_by_id = array();         // array of page data grouped by id
@@ -93,9 +93,9 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
     public function onConfigLoaded(array &$config)
     {
         // your code
-	  if (isset($settings['default_language'])) {
-		$this->default_language = $settings['default_language'];
-	  }
+      if (isset($settings['default_language'])) {
+        $this->default_language = $settings['default_language'];
+      }
     }
 
     /**
@@ -185,8 +185,8 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
     public function onMetaHeaders(array &$headers)
     {
         // your code
-	  $headers['language'] = 'Language';
-	  $headers['pid'] = 'pid';
+      $headers['language'] = 'Language';
+      $headers['pid'] = 'pid';
     }
 
     /**
@@ -213,9 +213,9 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
     public function onMetaParsed(array &$meta)
     {
         // your code
-	  if (!$meta['language']) {
-		$meta['language'] = $this->default_language;
-	  }
+      if (!$meta['language']) {
+        $meta['language'] = $this->default_language;
+      }
     }
 
     /**
@@ -295,8 +295,8 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
     public function onSinglePageLoaded(array &$pageData)
     {
         // your code
-	  $page_meta = $pageData['meta'];
-	     if ($page_meta['language']) {
+      $page_meta = $pageData['meta'];
+         if ($page_meta['language']) {
             $lang = $page_meta['language'];
         } else {
             $lang = $this->default_language;
@@ -358,7 +358,7 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
         // reset next and previous pages
         reset($pages);
         while($current = current($pages)){
-		  if($current === $currentPage){
+          if($current === $currentPage){
                     break;
             }
             next($pages);
@@ -391,7 +391,7 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
     public function onPageRendering(Twig_Environment &$twig, array &$twigVariables, &$templateName)
     {
         // your code
-	    $twigVariables['languages'] = array_keys($this->pages_by_language);
+        $twigVariables['languages'] = array_keys($this->pages_by_language);
         $page_id = $twigVariables['meta']['pid'];
         $alt_languages = $this->get_item($this->pages_by_id, $page_id, array());
         $twigVariables['page_languages'] = $alt_languages;
