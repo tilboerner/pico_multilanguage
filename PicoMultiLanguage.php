@@ -67,21 +67,6 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
         $pages_by_language = array(),   // array of page data grouped by language
         $pages_by_id = array();         // array of page data grouped by id
 
-    /**
-     * Triggered after Pico has loaded all available plugins
-     *
-     * This event is triggered nevertheless the plugin is enabled or not.
-     * It is NOT guaranteed that plugin dependencies are fulfilled!
-     *
-     * @see    Pico::getPlugin()
-     * @see    Pico::getPlugins()
-     * @param  object[] &$plugins loaded plugin instances
-     * @return void
-     */
-    public function onPluginsLoaded(array &$plugins)
-    {
-        // your code
-    }
 
     /**
      * Triggered after Pico has read its configuration
@@ -99,81 +84,6 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
     }
 
     /**
-     * Triggered after Pico has evaluated the request URL
-     *
-     * @see    Pico::getRequestUrl()
-     * @param  string &$url part of the URL describing the requested contents
-     * @return void
-     */
-    public function onRequestUrl(&$url)
-    {
-        // your code
-    }
-
-    /**
-     * Triggered after Pico has discovered the content file to serve
-     *
-     * @see    Pico::getBaseUrl()
-     * @see    Pico::getRequestFile()
-     * @param  string &$file absolute path to the content file to serve
-     * @return void
-     */
-    public function onRequestFile(&$file)
-    {
-        // your code
-    }
-
-    /**
-     * Triggered before Pico reads the contents of the file to serve
-     *
-     * @see    Pico::loadFileContent()
-     * @see    DummyPlugin::onContentLoaded()
-     * @param  string &$file path to the file which contents will be read
-     * @return void
-     */
-    public function onContentLoading(&$file)
-    {
-        // your code
-    }
-
-    /**
-     * Triggered after Pico has read the contents of the file to serve
-     *
-     * @see    Pico::getRawContent()
-     * @param  string &$rawContent raw file contents
-     * @return void
-     */
-    public function onContentLoaded(&$rawContent)
-    {
-        // your code
-    }
-
-    /**
-     * Triggered before Pico reads the contents of a 404 file
-     *
-     * @see    Pico::load404Content()
-     * @see    DummyPlugin::on404ContentLoaded()
-     * @param  string &$file path to the file which contents were requested
-     * @return void
-     */
-    public function on404ContentLoading(&$file)
-    {
-        // your code
-    }
-
-    /**
-     * Triggered after Pico has read the contents of the 404 file
-     *
-     * @see    Pico::getRawContent()
-     * @param  string &$rawContent raw file contents
-     * @return void
-     */
-    public function on404ContentLoaded(&$rawContent)
-    {
-        // your code
-    }
-
-    /**
      * Triggered when Pico reads its known meta header fields
      *
      * @see    Pico::getMetaHeaders()
@@ -184,23 +94,9 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
      */
     public function onMetaHeaders(array &$headers)
     {
-        // your code
+      // your code
       $headers['language'] = 'Language';
       $headers['pid'] = 'pid';
-    }
-
-    /**
-     * Triggered before Pico parses the meta header
-     *
-     * @see    Pico::parseFileMeta()
-     * @see    DummyPlugin::onMetaParsed()
-     * @param  string   &$rawContent raw file contents
-     * @param  string[] &$headers    known meta header fields
-     * @return void
-     */
-    public function onMetaParsing(&$rawContent, array &$headers)
-    {
-        // your code
     }
 
     /**
@@ -216,58 +112,6 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
       if (!$meta['language']) {
         $meta['language'] = $this->default_language;
       }
-    }
-
-    /**
-     * Triggered before Pico parses the pages content
-     *
-     * @see    Pico::prepareFileContent()
-     * @see    DummyPlugin::prepareFileContent()
-     * @see    DummyPlugin::onContentParsed()
-     * @param  string &$rawContent raw file contents
-     * @return void
-     */
-    public function onContentParsing(&$rawContent)
-    {
-        // your code
-    }
-
-    /**
-     * Triggered after Pico has prepared the raw file contents for parsing
-     *
-     * @see    Pico::parseFileContent()
-     * @see    DummyPlugin::onContentParsed()
-     * @param  string &$content prepared file contents for parsing
-     * @return void
-     */
-    public function onContentPrepared(&$content)
-    {
-        // your code
-    }
-
-    /**
-     * Triggered after Pico has parsed the contents of the file to serve
-     *
-     * @see    Pico::getFileContent()
-     * @param  string &$content parsed contents
-     * @return void
-     */
-    public function onContentParsed(&$content)
-    {
-        // your code
-    }
-
-    /**
-     * Triggered before Pico reads all known pages
-     *
-     * @see    Pico::readPages()
-     * @see    DummyPlugin::onSinglePageLoaded()
-     * @see    DummyPlugin::onPagesLoaded()
-     * @return void
-     */
-    public function onPagesLoading()
-    {
-        // your code
     }
 
     /**
@@ -344,7 +188,7 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
         array &$previousPage = null,
         array &$nextPage = null
     ) {
-              // only keep pages with same language as current
+        // only keep pages with same language as current
         $current_lang = $currentPage['language'];
         if (!$current_lang) {
             return;
@@ -359,23 +203,13 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
         reset($pages);
         while($current = current($pages)){
           if($current === $currentPage){
-                    break;
+            break;
             }
-            next($pages);
+          next($pages);
         }
         $previousPage = next($pages);
         prev($pages);
         $nextPage = prev($pages);
-    }
-
-    /**
-     * Triggered before Pico registers the twig template engine
-     *
-     * @return void
-     */
-    public function onTwigRegistration()
-    {
-        // your code
     }
 
     /**
@@ -396,17 +230,6 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
         $alt_languages = $this->get_item($this->pages_by_id, $page_id, array());
         $twigVariables['page_languages'] = $alt_languages;
 
-    }
-
-    /**
-     * Triggered after Pico has rendered the page
-     *
-     * @param  string &$output contents which will be sent to the user
-     * @return void
-     */
-    public function onPageRendered(&$output)
-    {
-        // your code
     }
 
     private function get_item($array, $key, $default='') {
