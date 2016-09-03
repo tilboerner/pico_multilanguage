@@ -112,6 +112,13 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
       if (!$meta['language']) {
         $meta['language'] = $this->default_language;
       }
+      $site_titles = $this->getConfig('site_titles');
+
+      if (is_array($site_titles)) {
+            if ($site_titles[$meta['language']]) {
+                $this->local_site_title = $site_titles[$meta['language']];
+            }
+      }
     }
 
     /**
@@ -229,7 +236,9 @@ final class PicoMultiLanguage extends AbstractPicoPlugin
         $page_id = $twigVariables['meta']['pid'];
         $alt_languages = $this->get_item($this->pages_by_id, $page_id, array());
         $twigVariables['page_languages'] = $alt_languages;
-
+        if ($this->local_site_title) {
+            $twigVariables['site_title'] = $this->local_site_title;
+        }
     }
 
     private function get_item($array, $key, $default='') {
