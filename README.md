@@ -81,7 +81,7 @@ of the template plugin provided.
 The `id` field used before has been replaced with `pid` to avoid a name collision.
 
 
-##License
+## License
 
 http://opensource.org/licenses/MIT
 
